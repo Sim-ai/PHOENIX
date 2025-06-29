@@ -80,16 +80,16 @@ optimizer = optim.Adam(model.parameters(), lr=learning_rate)
 
 train_losses = []
 
-
-plt.ion()  
-fig, ax = plt.subplots()
-line, = ax.plot([], [], marker='o')
-ax.set_xlim(0, epochs)
-ax.set_ylim(0, 5)  
-ax.set_xlabel('Epochs')
-ax.set_ylabel('Loss')
-ax.set_title('Training Loss Curve')
-plt.grid()
+# xpwang revise
+# plt.ion()  
+# fig, ax = plt.subplots()
+# line, = ax.plot([], [], marker='o')
+# ax.set_xlim(0, epochs)
+# ax.set_ylim(0, 5)  
+# ax.set_xlabel('Epochs')
+# ax.set_ylabel('Loss')
+# ax.set_title('Training Loss Curve')
+# plt.grid()
 
 model.train()
 
@@ -133,18 +133,27 @@ for epoch in range(epochs):
     train_losses.append(avg_loss)
 
 
-    line.set_xdata(range(1, epoch + 2))
-    line.set_ydata(train_losses)
-    ax.set_ylim(0, max(train_losses) * 1.1) 
-    plt.draw()
-    plt.pause(0.01)  
+    # line.set_xdata(range(1, epoch + 2))
+    # line.set_ydata(train_losses)
+    # ax.set_ylim(0, max(train_losses) * 1.1) 
+    # plt.draw()
+    # plt.pause(0.01)  
 
     print(f'Epoch [{epoch + 1}/{epochs}], Loss: {avg_loss:.4f}')
 
 
-plt.ioff()
-plt.savefig('loss_curve.png')
-plt.show()
+# plt.ioff()
+# plt.savefig('loss_curve.png')
+# plt.show()
+
+# 创建图像
+fig, ax = plt.subplots()
+ax.plot(range(1, len(train_losses) + 1), train_losses, marker='o', label='Loss')
+ax.set_xlabel('Epochs')
+ax.set_ylabel('Loss')
+ax.set_title('Training Loss Curve')
+ax.grid(True)
+ax.legend()
 
 
 save_path = 'model_weights.pth'
