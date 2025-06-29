@@ -67,7 +67,7 @@ model.eval()
 
 
 # folder_path = r'D:/'
-folder_path = r'./Data'
+folder_path = r'./Data/Data with PHOENIX'
 file_accuracies = {}
 all_true = []
 all_preds = []
