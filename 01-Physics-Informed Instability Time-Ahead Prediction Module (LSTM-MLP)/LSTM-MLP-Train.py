@@ -154,6 +154,8 @@ ax.set_ylabel('Loss')
 ax.set_title('Training Loss Curve')
 ax.grid(True)
 ax.legend()
+plt.savefig('loss_curve.png')
+plt.show()
 
 
 save_path = 'model_weights.pth'
