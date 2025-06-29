@@ -31,7 +31,13 @@ def load_data_from_csv(file_path):
 
     df = pd.read_csv(file_path, encoding='latin1')
     data = df.iloc[:, :18].values  
-    labels = df.iloc[:, 18].values
+    # labels = df.iloc[:, 18].values
+
+    # xpwang map the string into the integer
+    label_map = {'quasistable': 0, 'nonstationary': 1, 'instability': 2}
+    labels_str = df.iloc[:, 18]
+    labels = labels_str.map(label_map).astype(np.int64).values
+    
     return data, labels
 
 
@@ -64,7 +70,7 @@ window_size = 20
 target_offset = 5  
 
 # Load data
-folder_path = 'D:/DATA'  
+folder_path = './Data/Data with PHOENIX'  
 
 
 model = LSTM_MLP(input_size, hidden_size, lstm_layers, output_size).to(device)
