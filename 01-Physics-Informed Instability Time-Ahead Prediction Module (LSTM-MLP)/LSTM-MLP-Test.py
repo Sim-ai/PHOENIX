@@ -32,7 +32,13 @@ class LSTM_MLP(nn.Module):
 def load_data_from_csv(file_path):
     df = pd.read_csv(file_path, encoding='latin1')
     data = df.iloc[:, :18].astype(np.float32).values
-    labels = df.iloc[:, 18].astype(np.int64).values
+    #labels = df.iloc[:, 18].astype(np.int64).values
+
+    # xpwang map the string into the integer
+    label_map = {'quasistable': 0, 'nonstationary': 1, 'instability': 2}
+    labels_str = df.iloc[:, 18]
+    labels = labels_str.map(label_map).astype(np.int64).values
+    
     return data, labels
 
 def normalize_data(data):
@@ -60,7 +66,8 @@ model.load_state_dict(torch.load('model_weights_n_11.pth'))   # (The model has b
 model.eval()
 
 
-folder_path = r'D:/'
+# folder_path = r'D:/'
+folder_path = r'./Data'
 file_accuracies = {}
 all_true = []
 all_preds = []
